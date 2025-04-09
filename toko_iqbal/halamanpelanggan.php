@@ -1,10 +1,12 @@
 <?php
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: index.php");
+require 'koneksi.php';
+
+if(!isset($_SESSION['username']) || $_SESSION['level'] !== 'pelanggan') {
+    header('location: index.php');
     exit();
 }
-$username = htmlspecialchars($_SESSION['username']); // Sanitasi output
+
+$username = $_SESSION['username'];
 ?>
 
 <!DOCTYPE html>
@@ -61,13 +63,11 @@ $username = htmlspecialchars($_SESSION['username']); // Sanitasi output
       background-color: #004494;
     }
   </style>
-  </style>
 </head>
 <body>
   <div class="pelanggan-container">
-    <h1>Halaman pelanggan Toko Iqbal</h1>
-    <button onclick="window.location.href='registerasi.php'">Registrasi</button>
-    <button onclick="window.location.href='barang.php'">Barang</button>
+    <h1>Halaman Pelanggan Toko Iqbal</h1>
+    <button onclick="window.location.href='registerpelanggan.php'">Registrasi Pelanggan</button>
     <button onclick="window.location.href='logout.php'">Log Out</button>
     <div class="user-info">
       Logged in as: <span><?php echo $username; ?></span>

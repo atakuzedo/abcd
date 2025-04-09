@@ -1,20 +1,23 @@
 <?php
 require 'koneksi.php';
+if (!$koneksi) {
+    die("Koneksi database gagal: " . mysqli_connect_error());
+}
 if (isset($_POST['nama_barang'])) {
-  $nama=$_POST['nama_barang'];
-  $harga=$_POST['harga'];
-  $stok=$_POST['stok'];
+    $nama=$_POST['nama_barang'];
+    $harga=$_POST['harga'];
+    $stok=$_POST['stok'];
 
-  $query=mysqli_query($koneksi, "INSERT INTO barang (id_produk, nama_barang, harga, stok) VALUES (NULL,'$nama', '$harga', '$stok')");
-  if ($query) {
-      echo "<script>alert('Data Berhasil di tambahkan!')
-      window.location.href='index.php?page=produk';; </script>";
-  } else {
-      echo "<script>alert('Data Gagal di tambahkan!'); </script>";
-  }
+    $query=mysqli_query($koneksi, "INSERT INTO barang VALUES (NULL,'$nama', '$harga', '$stok')");
+    if ($query) {
+        echo "<script>alert('Data Berhasil di tambahkan!')
+        window.location.href='barang.php'; </script>";
+    } else {
+        echo "<script>alert('Data Gagal di tambahkan!'); </script>";
+    }
 
 }
-$search = isset($_GET['search']) ? $_GET['search'] : '';
+ $search = isset($_GET['search']) ? $_GET['search'] : '';
 
 // Query dengan pencarian
 $query = "SELECT * FROM barang";
@@ -59,6 +62,7 @@ $result = mysqli_query($koneksi, $query);
             border: 1px solid #555;
             border-radius: 4px;
             background-color: rgb(30, 30, 30);
+            color: white;
         }
         
         .button {
@@ -76,7 +80,7 @@ $result = mysqli_query($koneksi, $query);
         }
         
         .secondary {
-            background: #6c757d;
+            background: #dc3545;
             color: white;
         }
         
@@ -135,27 +139,27 @@ $result = mysqli_query($koneksi, $query);
             Tambah/Edit Barang
         </div>
         <div class="card-body">
-            <form id="formBarang">
+            <form action="barang.php" method="post" id="formBarang">
                 <div style="display: flex; gap: 15px; margin-bottom: 15px;">
                     <div style="flex: 1;">
                         <label>Nama Barang</label>
-                        <input type="text" id="nama_barang" required>
+                        <input type="text" name="nama_barang" id="nama_barang" required>
                     </div>
                     <div style="flex: 1;">
                         <label>Harga</label>
-                        <input type="number" id="harga" required>
+                        <input type="number" name="harga" id="harga" required>
                     </div>
                     <div style="flex: 1;">
                         <label>Stok</label>
-                        <input type="number" id="stok" required>
+                        <input type="number" name="stok" id="stok" required>
                     </div>
                 </div>
-                <button type="submit" class="button primary">Simpan</button>
-                <button type="button" class="button secondary" onclick="resetForm()">Batal</button>
+                <button type="submit" name="submit" class="button primary">Simpan</button>
+                <button type="button" name="button" class="button secondary" onclick="resetForm()">Batal</button>
             </form>
         </div>
     </div>
-
+    <button onclick="window.location.href='halamanadmin.php'" class='button primary'>Kembali Ke Halaman Admin</button>
         <!-- Tabel Daftar Barang -->
         <div class="card">
     <div class="card-header">
@@ -182,7 +186,7 @@ $result = mysqli_query($koneksi, $query);
                     <td>
                         <a href="?page=produk_ubah&id_barang=<?= $data['id_barang'] ?>" 
                            class="button warning">Edit</a>
-                        <a href="?page=produk_hapus&id_barang=<?= $data['id_barang'] ?>" 
+                        <a href="baranghapus.php?id_barang=<?=$data['id_barang']?>" 
                            class="button danger" 
                            onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
                     </td>
@@ -193,3 +197,9 @@ $result = mysqli_query($koneksi, $query);
         </div>
     </div>
 </div>
+<script>
+    function resetForm() {
+  // Add form reset logic here
+  document.querySelector('form').reset(); // Example basic
+    }   
+</script>

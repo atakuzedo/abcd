@@ -1,10 +1,12 @@
 <?php
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: index.php");
+require 'koneksi.php';
+
+if(!isset($_SESSION['username']) || $_SESSION['level'] !== 'admin') {
+    header('location: index.php');
     exit();
 }
-$username = htmlspecialchars($_SESSION['username']); // Sanitasi output
+
+$username = $_SESSION['username']; 
 ?>
 
 <!DOCTYPE html>
@@ -61,12 +63,13 @@ $username = htmlspecialchars($_SESSION['username']); // Sanitasi output
       background-color: #004494;
     }
   </style>
-  </style>
 </head>
 <body>
   <div class="admin-container">
     <h1>Halaman Admin Toko Iqbal</h1>
-    <button onclick="window.location.href='registerasi.php'">Registrasi</button>
+    <button onclick="window.location.href='registeradmin.php'">Registrasi Admin</button>
+    <button onclick="window.location.href='registerpelanggan.php'">Registrasi Pelanggan</button>
+    <button onclick="window.location.href='penjualan.php'">Penjualan</button>
     <button onclick="window.location.href='barang.php'">Barang</button>
     <button onclick="window.location.href='logout.php'">Log Out</button>
     <div class="user-info">

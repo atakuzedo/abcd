@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 04, 2025 at 01:47 PM
+-- Generation Time: Apr 09, 2025 at 03:27 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.13
 
@@ -44,8 +44,10 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `stok`) VALUES
 (3, 'Monitor', 10000000, 12),
 (4, 'Power Supply', 600000, 24),
 (5, 'Motherboard', 1500000, 34),
-(6, 'Motherboard1111', 1, 1),
-(7, 'Monitorzzzzzz', 3000000, 50);
+(6, 'abcd', 1000000, 1),
+(7, 'aaa', 500000, 10),
+(8, 'wtf', 111, 111),
+(11, 'sasasa', 31231313, 131212);
 
 -- --------------------------------------------------------
 
@@ -54,6 +56,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `stok`) VALUES
 --
 
 CREATE TABLE `detail_penjualan` (
+  `id` int NOT NULL,
   `id_penjualan` int NOT NULL,
   `id_barang` int NOT NULL,
   `jumlah` int NOT NULL,
@@ -79,7 +82,9 @@ CREATE TABLE `pelanggan` (
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `alamat`, `telepon`) VALUES
 (1, 'Hafidzh', 'GSP', '0812345678910\r\n'),
-(2, 'Hibay', 'Jamrud', '0897658475634\r\n');
+(2, 'Hibay', 'Jamrud', '0897658475634\r\n'),
+(3, 'masopeso', 'anowe', '123'),
+(4, 'ryu sun jae', 'seoul', '123');
 
 -- --------------------------------------------------------
 
@@ -90,6 +95,7 @@ INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `alamat`, `telepon`) 
 CREATE TABLE `penjualan` (
   `id_penjualan` int NOT NULL,
   `tanggal_penjualan` date NOT NULL,
+  `total_harga` decimal(10,0) NOT NULL,
   `id_pelanggan` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -111,8 +117,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `level`) VALUES
-(1, 'xxiqbal', 'x', 'admin'),
-(2, 'xxboy', 'x', 'pelanggan');
+(1, 'a', 'a', 'admin'),
+(2, 'p', 'p', 'pelanggan');
 
 --
 -- Indexes for dumped tables
@@ -123,6 +129,12 @@ INSERT INTO `user` (`id`, `username`, `password`, `level`) VALUES
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id_barang`);
+
+--
+-- Indexes for table `detail_penjualan`
+--
+ALTER TABLE `detail_penjualan`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `pelanggan`
@@ -150,13 +162,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_barang` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `detail_penjualan`
+--
+ALTER TABLE `detail_penjualan`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id_pelanggan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pelanggan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
