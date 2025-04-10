@@ -1,0 +1,60 @@
+.user-info {
+  color: #bbb;
+  font-size: 1.2em;
+}
+
+.user-info span {
+  color: #dd2476; 
+  font-weight: bold;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: rgb(20, 20, 20);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.admin-container, .pelanggan-container {
+  background-color: rgb(40, 40, 40);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  width: 300px;
+  text-align: center;
+  animation: formAppear 0.8s ease-out;
+}
+    
+@keyframes formAppear {
+  0% {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+h1 {
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(90deg, #ff512f, #dd2476, #8a1c4a);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.logout{
+  background: #ef1818;
+}
